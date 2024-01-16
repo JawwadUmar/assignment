@@ -19,13 +19,25 @@ app.get('/', (req, res) => {
 });
 
 // Endpoint to handle message submissions
+// app.post('/', (req, res) => {
+//   const messageData = req.body.message;
+//   if (messageData) {
+//     messages.push(messageData);
+//     console.log(messageData);
+//     res.status(200).send('Message submitted successfully!');
+//   } else {
+//     res.status(400).send('Bad Request: Message content is required.');
+//   }
+// });
+
 app.post('/', (req, res) => {
-  const messageData = req.body.message;
-  if (messageData) {
-    messages.push(messageData);
-    console.log(messageData);
-    res.status(200).send('Message submitted successfully!');
-  } else {
-    res.status(400).send('Bad Request: Message content is required.');
-  }
-});
+    const messageData = req.body.message;
+    if (messageData) {
+      messages.push(messageData);
+      console.log(messageData);
+      res.status(200).json({ success: true, message: 'Message submitted successfully!', messages: messages });
+    } else {
+      res.status(400).json({ success: false, error: 'Bad Request: Message content is required.' });
+    }
+  });
+  
